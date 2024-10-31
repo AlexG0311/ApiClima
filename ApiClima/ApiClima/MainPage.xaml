@@ -1,0 +1,53 @@
+﻿<ContentPage
+    x:Class="ApiClima.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#f0f0f0">
+
+    <StackLayout Padding="20" Spacing="20">
+        <Label Text="Clima"
+               FontSize="32"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="#333" />
+
+        <Entry x:Name="cityEntry"
+               Placeholder="Enter city name"
+               FontSize="18"
+               BackgroundColor="#fff"
+               TextColor="#333"
+               Margin="0,0,0,10"
+                />
+
+        <Button Text="Obtener CLima"
+                FontSize="18"
+                BackgroundColor="#007BFF"
+                TextColor="White"
+                Clicked="OnSearchButtonClicked" />
+
+        <Label x:Name="cityLabel"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="#333" />
+
+        <Image x:Name="iconImage"
+               WidthRequest="100"
+               HeightRequest="100"
+               HorizontalOptions="Center" />
+
+        <Label x:Name="temperatureLabel"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="#FF5722" />
+
+        <Label x:Name="weatherLabel"
+               FontSize="18"
+               HorizontalOptions="Center"
+               TextColor="#333" />
+
+        <Label x:Name="localtimeLabel" FontSize="Medium" HorizontalOptions="Center" Margin="0,20,0,10"      TextColor="Black" FontAttributes="Bold"/>
+    </StackLayout>
+
+</ContentPage>
