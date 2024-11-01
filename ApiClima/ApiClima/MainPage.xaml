@@ -35,6 +35,7 @@
             FontSize="18"
             Text="Obtener CLima"
             TextColor="White" />
+        <Button Clicked="Insertar" Text="Agregar" />
 
         <Label
             x:Name="cityLabel"
@@ -71,7 +72,7 @@
             HorizontalOptions="Center"
             TextColor="Black" />
 
-        <Button Clicked="Insertar" Text="Agregar" />
+       
     </StackLayout>
 
 </ContentPage>

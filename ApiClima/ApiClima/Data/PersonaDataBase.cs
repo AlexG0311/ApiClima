@@ -37,7 +37,7 @@ namespace ApiClima.Data
             return await database.DeleteAsync(clima);
         }
 
-        public async Task<int> GuardarPersona(ClimaModel clima)
+        public async Task<int> GuardarClimaAsync(ClimaModel clima)
         {
             return await database.InsertAsync(clima);
         }

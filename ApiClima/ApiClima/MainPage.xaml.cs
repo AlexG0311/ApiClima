@@ -59,6 +59,7 @@ namespace ApiClima
                     // Mostrar información del clima actual
                     cityLabel.Text = $"Ciudad: {weatherData.location.name}"; // Ciudad
                     temperatureLabel.Text = $"{weatherData.current.temp_c} °C"; // Temperatura en grados Celsius
+                    selectedCity = cityName ;
                     weatherLabel.Text = weatherData.current.condition.text; // Resumen del clima
                     localtimeLabel.Text = $"Hora: {weatherData.location.localtime}";
                     // Cargar ícono del clima
@@ -99,7 +100,7 @@ namespace ApiClima
 
         private async void Insertar(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(selectedCity) && currentTemperature != 0 && !string.IsNullOrEmpty(currentDescription))
+            if (!string.IsNullOrEmpty(selectedCity))
             {
                 var climaData = new ClimaModel
                 {
@@ -107,7 +108,7 @@ namespace ApiClima
                  
                 };
 
-                await _database.GuardarPersona(climaData);
+                await _database.GuardarClimaAsync(climaData);
 
                 await DisplayAlert("Guardado", "El clima de la ciudad ha sido guardado en la base de datos.", "OK");
             }
@@ -116,53 +117,6 @@ namespace ApiClima
                 await DisplayAlert("Error", "Primero obtén el clima de una ciudad antes de guardarlo.", "OK");
             }
         }
-
-
-
-
-
-
-
-
-
-
-        private void Limpiar()
-        {
-
-            cityEntry.Text = "";
-        }
-
-        private ClimaModel LlenarPersona(bool isUpdate = false)
-        {
-            ClimaModel persona = new ClimaModel();
-
-            if (isUpdate)
-            {
-                persona.Id = Convert.ToInt32(id.Text);
-            }
-
-            persona.name = cityLabel.Text;
-
-            return persona;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
