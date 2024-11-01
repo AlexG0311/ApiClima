@@ -6,19 +6,31 @@ using Microsoft.Maui.Controls;
 using ApiClima.Models;
 using static ApiClima.Models.WeatherData;
 
+using System.Security.Claims;
+using ApiClima.Data;
+
 
 
 namespace ApiClima
 {
     public partial class MainPage : ContentPage
     {
+
+        private readonly PersonaDataBase _database;
+        private string selectedCity;
+        private double currentTemperature;
+        private string currentDescription;
+
         private const string ApiKey = "e0bea8c5b38e480f93f150836241504"; // Tu clave API
 
         public MainPage()
         {
             InitializeComponent();
-        }
 
+            var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WeatherData.db3");
+            _database = new PersonaDataBase(dbPath);
+
+        }
         private async void OnSearchButtonClicked(object sender, EventArgs e)
         {
             string cityName = cityEntry.Text;
@@ -65,7 +77,95 @@ namespace ApiClima
                 Console.WriteLine(ex.Message);
             }
         }
+
+
+       // private async void Insertar(object sender, EventArgs e)
+       // {
+         //   ClimaModel clima = LlenarPersona();
+
+         //   int result = await App.PersonaDataBase.GuardarPersona(clima);
+            //int result = await _apiService.PostAsync<Persona,int>("api/Personas", persona);
+
+           // if (result > 0)
+    //        {
+        //        await DisplayAlert("Insert", "Exitoo", "Ok");
+      //      }
+
+         //  Limpiar();
+      //  }
+
+
+
+
+        private async void Insertar(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(selectedCity) && currentTemperature != 0 && !string.IsNullOrEmpty(currentDescription))
+            {
+                var climaData = new ClimaModel
+                {
+                    name = selectedCity,
+                 
+                };
+
+                await _database.GuardarPersona(climaData);
+
+                await DisplayAlert("Guardado", "El clima de la ciudad ha sido guardado en la base de datos.", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Error", "Primero obtén el clima de una ciudad antes de guardarlo.", "OK");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+        private void Limpiar()
+        {
+
+            cityEntry.Text = "";
+        }
+
+        private ClimaModel LlenarPersona(bool isUpdate = false)
+        {
+            ClimaModel persona = new ClimaModel();
+
+            if (isUpdate)
+            {
+                persona.Id = Convert.ToInt32(id.Text);
+            }
+
+            persona.name = cityLabel.Text;
+
+            return persona;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
-    
+
 }

@@ -1,4 +1,6 @@
-﻿namespace ApiClima
+﻿
+
+namespace ApiClima
 {
     public partial class App : Application
     {
@@ -8,5 +10,7 @@
 
             MainPage = new AppShell();
         }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 
 namespace ApiClima.Models
 {
@@ -14,6 +15,8 @@ namespace ApiClima.Models
 
         public class Location
         {
+            [PrimaryKey, AutoIncrement]
+            public int Id { get; set; }
             public string name { get; set; }
             public string localtime { get; set; }
         }
